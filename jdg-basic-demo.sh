@@ -29,7 +29,7 @@ TEMPLATE=$(echo ${OPENSHIFT_JDG_APP_TEMPLATE} | sed -e "s/.json//")
 
 oc process ${TEMPLATE} -v UNIQUEID=1,JGROUPS_CLUSTER_PASSWORD=p@ssw0rd | oc create -f -
 
-#oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
+oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
 
-#oc policy add-role-to-user view system:serviceaccount:$(oc project -q):eap-service-account -n $(oc project -q)
+oc policy add-role-to-user view system:serviceaccount:$(oc project -q):eap-service-account -n $(oc project -q)
 
