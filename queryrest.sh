@@ -1,8 +1,10 @@
 #!/bin/sh
 echo USAGE query.sh {CACHE HOST:PORT}
 
-HOST_ADDR=datagrid-app-1-sample-project.rhel-cdk.10.1.2.2.xip.io
-HOST_ADDR=127.0.0.1:8081
+HOST_ADDR=$(oc describe route datagrid-app-1 | grep Host | awk '{print $3 }')
+echo $HOST_ADDR
+#HOST_ADDR=datagrid-app-1-sample-project.rhel-cdk.10.1.2.2.xip.io
+#HOST_ADDR=127.0.0.1:8081
 CACHE=default
 
 if [ $# -eq 1 ]; then
@@ -18,7 +20,8 @@ if [ $# -eq 2 ]; then
 fi
 
 echo "-----------------------"
-time curl -vi  http://$HOST_ADDR/rest/$CACHE/A
+curl -vi  http://$HOST_ADDR/rest/$CACHE/A
+#time curl -vi  http://$HOST_ADDR/rest/$CACHE/A
 echo "-----------------------"
 curl http://$HOST_ADDR/rest/$CACHE/B
 echo "-----------------------"
